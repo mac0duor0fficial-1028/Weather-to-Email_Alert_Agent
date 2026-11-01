@@ -2,9 +2,30 @@
 
 Airflow-orchestrated weather alert pipeline. Fetches the daily forecast from [Open-Meteo](https://open-meteo.com), checks configurable rain, heat, and wind thresholds, and emails an alert via SMTP when a threshold is crossed.
 
-```
-[Airflow DAG] → fetch_weather → check_rules → send_alert
-                 Open-Meteo      thresholds     SMTP email
+```mermaid
+flowchart LR
+    subgraph AIRFLOW["🌀 Airflow DAG: weather_alert · daily 06:00"]
+        direction LR
+        A["📡 fetch_weather"] --> B["🧮 check_rules"]
+        B --> C["📧 send_alert"]
+    end
+
+    S(["⏰ Scheduler"]) --> A
+    API[("☁️ Open-Meteo API")] -. "forecast JSON" .-> A
+    T{{"🎚️ Thresholds<br/>rain · heat · wind"}} -. "config" .-> B
+    C -. "SMTP" .-> M(["📬 Your inbox"])
+
+    classDef task fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e
+    classDef ext fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f
+    classDef cfg fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#4c1d95
+    classDef out fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+
+    class A,B,C task
+    class S,API ext
+    class T cfg
+    class M out
+
+    style AIRFLOW fill:#f8fafc,stroke:#94a3b8,stroke-width:2px,stroke-dasharray: 6 4
 ```
 
 ## Features
