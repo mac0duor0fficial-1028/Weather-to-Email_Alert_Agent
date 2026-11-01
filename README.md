@@ -226,4 +226,5 @@ pytest
 `rules.py` has no network or email code, so its tests run instantly with no setup.
 
 ## License
-This project is licenced under the MIT
+
+This project is licenced under the [MIT LICENSING](LICENSE).
