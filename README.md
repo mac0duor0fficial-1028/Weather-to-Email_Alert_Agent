@@ -227,4 +227,4 @@ pytest
 
 ## License
 
-This project is licenced under the [MIT LICENSING](LICENSE).
+This project is open-source and licensed under the terms of the [MIT LICENSING](LICENSE).
