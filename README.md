@@ -2,48 +2,8 @@
 
 Airflow-orchestrated weather alert pipeline. Fetches the daily forecast from [Open-Meteo](https://open-meteo.com), checks configurable rain, heat, and wind thresholds, and emails an alert via SMTP when a threshold is crossed.
 
-```mermaid
-%%{init: {
-  "theme": "base",
-  "themeVariables": {
-    "fontFamily": "Segoe UI, Roboto, sans-serif",
-    "fontSize": "16px",
-    "lineColor": "#58a6ff",
-    "primaryTextColor": "#ffffff",
-    "edgeLabelBackground": "#0d1117"
-  }
-}}%%
-flowchart LR
-    S(["⏰ Scheduler<br/>daily 06:00"])
+![Crypto Data Pipeline Architecture](images/your-exported-diagram.svg)
 
-    subgraph DAG["🌀 Airflow DAG · weather_alert"]
-        direction LR
-        A["📡 fetch_weather"] ==> B["🧮 check_rules"] ==> C["📧 send_alert"]
-    end
-
-    API[("☁️ Open-Meteo API")]
-    T{{"🎚️ Thresholds<br/>rain · heat · wind"}}
-    M(["📬 Inbox"])
-
-    S ==> A
-    API -. "forecast JSON" .-> A
-    T -. "config" .-> B
-    C -. "SMTP" .-> M
-
-    classDef task fill:#0b2540,stroke:#58a6ff,stroke-width:3px,color:#ffffff
-    classDef ext fill:#3a2a05,stroke:#f2cc60,stroke-width:3px,color:#ffffff
-    classDef cfg fill:#2a1648,stroke:#d2a8ff,stroke-width:3px,color:#ffffff
-    classDef out fill:#0f2d1a,stroke:#3fb950,stroke-width:3px,color:#ffffff
-
-    class A,B,C task
-    class S,API ext
-    class T cfg
-    class M out
-
-    style DAG fill:#161b22,stroke:#8b949e,stroke-width:2px,stroke-dasharray: 6 4,color:#ffffff
-
-    linkStyle default stroke:#58a6ff,stroke-width:3px
-```
 
 ## Features
 
