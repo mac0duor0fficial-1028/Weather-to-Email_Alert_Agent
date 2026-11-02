@@ -2,7 +2,7 @@
 
 Airflow-orchestrated weather alert pipeline. Fetches the daily forecast from [Open-Meteo](https://open-meteo.com), checks configurable rain, heat, and wind thresholds, and emails an alert via SMTP when a threshold is crossed.
 
-![Crypto Data Pipeline Architecture](images/your-exported-diagram.svg)
+![Weather-to-Email-Alert-Agent](docs/images/Weather-to-Email-Alert-Agent.png)
 
 
 ## Features
